@@ -28,7 +28,7 @@ export default async function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar />
-        <main className="py-8">
+        <main className="py-24">
         {children}
         </main>
       </body>

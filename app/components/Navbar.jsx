@@ -4,7 +4,7 @@ import React from 'react'
 
 function Navbar() {
     return (
-        <nav className='bg-slate-700 sticky'>
+        <nav className='bg-slate-700 fixed top-0 left-0 right-0 w-full z-50 shadow-lg '>
             <div className="container flex justify-between items-center py-4">
                 <div className="nav-brand">
                     <Link href="/" > 
@@ -17,7 +17,7 @@ function Navbar() {
                 </div>
 
                 <ul className="flex gap-4 ">
-                    <li>About</li>
+                    <li> <Link href='/login'>Login</Link> </li>
                     <li>Contact Us</li>
                 </ul>
             </div>

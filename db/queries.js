@@ -1,5 +1,7 @@
 import { eventModel } from "@/models/event-models";
+import { userModel } from "@/models/user-models";
 import { replaceMongoIdInArray, replaceMongoIdInObject } from "@/utils/data-util";
+import mongoose from "mongoose";
 
 
 async function getAllEvents() {
@@ -13,4 +15,8 @@ async function getEventById(id) {
     return replaceMongoIdInObject(event)
 }
 
-export { getAllEvents, getEventById };
+async function createUser(user) {
+    return await userModel.create(user)
+}
+
+export { getAllEvents, getEventById, createUser };
