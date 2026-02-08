@@ -19,7 +19,7 @@ function HeroSection({ eventInfo }) {
                         <span> {eventInfo?.going_ids.length} Going</span>
                     </div>
                 </div>
-                <ActionsButtons fromDetails={true} />
+                <ActionsButtons event={eventInfo} fromDetails={true} />
             </div>
         </section>
     )

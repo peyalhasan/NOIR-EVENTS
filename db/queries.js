@@ -21,7 +21,27 @@ async function createUser(user) {
 
 async function findUserCredentials(credentials) {
     const user = await userModel.findOne(credentials).lean();
-    return user;
+    if (user) {
+        return replaceMongoIdInObject(user)
+    }
+    return null;
 }
 
-export { getAllEvents, getEventById, createUser, findUserCredentials };
+async function updateInterest(eventId, authId) {
+    const event = await eventModel.findById(eventId)
+
+    if (event) {
+        const founUsers = event.interested_ids.find(id => id.toString() === authId);
+
+        if (founUsers) {
+            event.interested_ids.pull(new mongoose.Types.ObjectId(authId))
+        } else {
+            event.interested_ids.push(new mongoose.Types.ObjectId(authId))
+        }
+        event.save()
+    }
+
+
+}
+
+export { getAllEvents, getEventById, createUser, findUserCredentials, updateInterest };

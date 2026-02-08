@@ -2,6 +2,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import { bdConnect } from "./services/mongo";
+import AuthProvider from "./providers/AuthProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -21,16 +22,18 @@ export const metadata = {
 
 
 export default async function RootLayout({ children }) {
-  await bdConnect()
+  const connect = await bdConnect()
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar />
-        <main className="py-24">
-        {children}
-        </main>
+        <AuthProvider>
+          <Navbar />
+          <main className="py-24">
+            {children}
+          </main>
+        </AuthProvider>
       </body>
     </html>
   );
