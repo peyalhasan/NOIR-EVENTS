@@ -27,24 +27,30 @@ async function getAllEvents({ query }) {
 
 
 async function getEventById(id) {
+    await dbConnect()
     const event = await eventModel.findById(id).lean();
     return replaceMongoIdInObject(event)
 }
 
 async function createUser(user) {
+    await dbConnect()
     return await userModel.create(user)
 }
 
 async function findUserCredentials(credentials) {
+    await dbConnect()
     const user = await userModel.findOne(credentials).lean();
     if (user) {
+
         return replaceMongoIdInObject(user)
     }
     return null;
 }
 
 async function updateInterest(eventId, authId) {
-    const event = await eventModel.findById(eventId)
+    await dbConnect();
+
+    const event = await eventModel.findById(eventId);
 
     if (event) {
         const founUsers = event.interested_ids.find(id => id.toString() === authId);
@@ -62,6 +68,9 @@ async function updateInterest(eventId, authId) {
 
 
 async function updateGoing(eventId, authId) {
+
+    await dbConnect()
+
     const event = await eventModel.findById(eventId);
     event.going_ids.push(new mongoose.Types.ObjectId(authId))
     event.save()
