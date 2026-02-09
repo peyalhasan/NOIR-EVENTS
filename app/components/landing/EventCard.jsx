@@ -17,7 +17,6 @@ function EventCard({ event }) {
                     height={400}
                     src={event?.imageUrl} alt="Event 1" className="w-full h-64 object-cover"
                     quality={100}
-                    placeholder=''
                 />
 
                 <div className="pt-3 pl-3 pr-3">

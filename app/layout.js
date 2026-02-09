@@ -1,7 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "./components/Navbar";
-import { bdConnect } from "./services/mongo";
+import { dbConnect } from "./services/mongo";
 import AuthProvider from "./providers/AuthProvider";
 
 const geistSans = localFont({
@@ -22,7 +22,11 @@ export const metadata = {
 
 
 export default async function RootLayout({ children }) {
-  const connect = await bdConnect()
+  try {
+    await dbConnect();
+  } catch (error) {
+    console.error('Failed to connect to database:', error);
+  }
   return (
     <html lang="en">
       <body

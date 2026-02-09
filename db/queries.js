@@ -1,3 +1,4 @@
+import { dbConnect } from "@/app/services/mongo";
 import { eventModel } from "@/models/event-models";
 import { userModel } from "@/models/user-models";
 import { replaceMongoIdInArray, replaceMongoIdInObject } from "@/utils/data-util";
@@ -5,6 +6,7 @@ import mongoose from "mongoose";
 
 
 async function getAllEvents({ query }) {
+    await dbConnect()
     let allEvents = [];
 
     if (query) {
