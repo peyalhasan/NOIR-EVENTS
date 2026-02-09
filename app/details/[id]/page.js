@@ -27,7 +27,7 @@ async function DetailsPage({ params: { id } }) {
         <>
             <HeroSection eventInfo={eventInfo} />
             <section className='container'>
-                <div className='grid grid-cols-5 gap-12 my-12'>
+                <div className='flex flex-col md:flex-row gap-12 my-12'>
                     <EventDetails swags={eventInfo?.swags} details={eventInfo?.details} />
                     <EventVenue location={eventInfo?.location} />
                 </div>

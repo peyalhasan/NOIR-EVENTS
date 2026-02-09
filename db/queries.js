@@ -4,8 +4,22 @@ import { replaceMongoIdInArray, replaceMongoIdInObject } from "@/utils/data-util
 import mongoose from "mongoose";
 
 
-async function getAllEvents() {
-    const allEvents = await eventModel.find().lean();
+async function getAllEvents({ query }) {
+    let allEvents = [];
+
+    if (query) {
+        const regex = new RegExp(query, "i");
+        allEvents = await eventModel.find({
+            $or: [
+                { name: { $regex: regex } },
+                { details: { $regex: regex } },
+                { location: { $regex: regex } }
+            ]
+        }).lean()
+
+    } else {
+        allEvents = await eventModel.find().lean();
+    }
     return replaceMongoIdInArray(allEvents);
 }
 
