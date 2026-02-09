@@ -2,7 +2,7 @@
 
 A modern event discovery and management platform built with Next.js, allowing users to explore, register, and manage events seamlessly.
 
-![NOIR Events](/Nior%20Events.png)
+![NOIR Events](/public/Nior%20Events.png)
 
 ## 🌐 Live Demo
 
