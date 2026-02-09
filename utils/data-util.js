@@ -1,8 +1,10 @@
 export const replaceMongoIdInArray = (array) => {
     const mappedArray = array.map(item => {
+        const plainItem = JSON.parse(JSON.stringify(item));
+
         return {
-            id: item._id.toString(),
-            ...item
+            id: plainItem._id?.toString() || plainItem._id,
+            ...plainItem
         }
     }).map(({ _id, ...rest }) => rest)
     return mappedArray;
